@@ -1,0 +1,1 @@
+{"name":"Local: copy_those_elements","url":"d:\\Phitron.io\\semister-2\\DSA\\Module-14.5\\copy_those_elements.cpp","tests":[{"id":1702990442944,"input":"5\n10 20 30 40 50","output":"50 40 30 20 10"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Phitron.io\\semister-2\\DSA\\Module-14.5\\copy_those_elements.cpp","group":"local","local":true}
