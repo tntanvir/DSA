@@ -1,0 +1,1 @@
+{"name":"Local: perindom","url":"d:\\Phitron.io\\seminster-1\\week5\\19 solved problem\\perindom.c","tests":[{"id":1699159551569,"input":"abcd","output":"NO"},{"id":1699159562766,"input":"madam","output":"YES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Phitron.io\\seminster-1\\week5\\19 solved problem\\perindom.c","group":"local","local":true}
