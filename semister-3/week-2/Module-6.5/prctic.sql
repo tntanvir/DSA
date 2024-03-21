@@ -1,0 +1,78 @@
+USE DUMMYDB;
+-- 3rd highest salary 
+SELECT DISTINCT SALARY
+FROM EMPLOYEES
+LIMIT 2,1;
+
+-- 3rd highest salary EMPLOYESS
+SELECT *
+FROM EMPLOYEES
+WHERE SALARY=(
+				SELECT DISTINCT SALARY
+				FROM EMPLOYEES
+				LIMIT 2,1
+			);
+
+
+-- 3rd lowest salary 
+SELECT DISTINCT SALARY
+FROM EMPLOYEES
+ORDER BY SALARY ASC
+LIMIT 2,1;
+
+-- 3rd lowest salary EMPLOYEES
+SELECT *
+FROM EMPLOYEES
+WHERE SALARY=(
+			SELECT DISTINCT SALARY
+			FROM EMPLOYEES
+			ORDER BY SALARY ASC
+			LIMIT 2,1
+            );
+
+
+-- Which employee has been hired after Steven?
+SELECT HIRE_DATE
+FROM EMPLOYEES
+WHERE FIRST_NAME='Steven' AND LAST_NAME='KING';
+
+
+SELECT *
+FROM EMPLOYEES
+WHERE HIRE_DATE>(SELECT HIRE_DATE
+				FROM EMPLOYEES
+				WHERE FIRST_NAME='Steven' 
+                AND LAST_NAME='KING'
+                );
+                
+                
+
+-- Common Table expression 
+
+WITH THRD_HIEST AS
+(
+	SELECT SALARY
+    FROM EMPLOYEES
+    
+					
+					LIMIT 2,1
+				
+)
+
+SELECT *
+FROM EMPLOYEES
+WHERE SALARY=(SELECT * FROM THRD_HIEST);
+
+
+
+
+
+WITH ThirdHighestSalary AS (
+    SELECT Salary
+    FROM Employees
+    ORDER BY Salary DESC
+    LIMIT 1 OFFSET 2
+)
+SELECT first_name, last_name
+FROM Employees
+WHERE Salary = (SELECT * FROM ThirdHighestSalary);
