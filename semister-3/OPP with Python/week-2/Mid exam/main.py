@@ -1,6 +1,7 @@
 from datetime import datetime
 
 class Star_Cinema:
+    hall_list=[]
     def __init__(self,name,id,row,column):
         self.name=name
         self.id=id
