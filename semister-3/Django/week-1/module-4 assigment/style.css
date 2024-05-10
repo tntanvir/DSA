@@ -1,0 +1,31 @@
+.row-center {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.min-h {
+    min-height: 100vh;
+}
+
+.max-w {
+    max-width: 53rem !important;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 1px 6px 20px 0px rgba(128, 128, 128, 0.744);
+    margin-top: 2rem;
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mycard {
+    max-height: 250px !important;
+    min-height: 250px !important;
+    /* overflow: hidden; */
+
+}
