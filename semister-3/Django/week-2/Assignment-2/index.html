@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport-tanvir</title>
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="input-container">
+        <div class="input-wrapper">
+            <input placeholder="Enter Player Name" type="text" id="input-field" required>
+        </div>
+        <button type="button" class="submit-btn">Submit</button>
+    </div>
+    <div class="" id="alldata">
+        <div id="fst-div">
+
+        </div>
+        <div id="sec-div">
+            <div class="card" style="width: 16rem;">
+                <!-- <img src="https://media.istockphoto.com/id/1455906752/photo/minimal-idea-of-yellow-light-bulb-surrounded-with-blue-bulbs-on-pastel-background-3d.jpg?s=1024x1024&w=is&k=20&c=i1ivZ3HrQWEwS-QxPoZFj1C5YhoDDOg6OlfCIFClzTY="
+                    class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title text-center">Group</h5>
+                    <p class="card-text">Total lenght: <span id="len">0</span> </p>
+                    <ol id="player">
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade " id="noText" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                    <button id="close" type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
