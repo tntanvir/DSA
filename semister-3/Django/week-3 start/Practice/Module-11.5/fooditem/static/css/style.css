@@ -1,0 +1,15 @@
+.mainpg {
+    min-height: 100vh;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer {
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 1px dashed gray;
+    text-align: center;
+}
