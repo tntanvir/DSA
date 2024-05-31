@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+<h1>hello i am profiles</h1>
+<form method="post" class="w-75 container mx-auto">
+    {% csrf_token %}
+    {{forms | crispy}}
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+
+
+{% endblock %}

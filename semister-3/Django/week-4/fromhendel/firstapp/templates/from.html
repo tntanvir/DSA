@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container " style="max-width: 50%; margin-top: 5rem;">
+    <form method="post" action="/about/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Enter Name</label>
+            <input type="text" class="form-control" id="name" name="username">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                name="useremail">
+
+        </div>
+        <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="select">
+            <option selected>Reting</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- <h1>name: {{name}}</h1>
+    <h1>email: {{email}}</h1> -->
+
+</div>
+
+
+
+{% endblock %}
