@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+<h1>hello i am author</h1>
+<form method="post" class="w-75 container mx-auto">
+    {% csrf_token %}
+    {{data | crispy}}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div>
+    change password <a href="{% url 'changepassword' %}" class="btn btn-primary">Change Password</a>
+</div>
+
+
+{% endblock %}
