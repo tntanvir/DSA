@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="container d-flex gap-2 justify-content-between align-items-center " style="height: 100vh;">
+    <div class="row row-cols-6">
+        <img src="{{data.image.url}}" style="
+        width: 40rem; border-radius: 2rem;
+    ">
+    </div>
+    <div class="w-50">
+        <h1>{{data.name}}</h1>
+        <p class="fs-3">Price: $ {{data.price}}</p>
+        <p class="fs-4">Quantity: {{data.quantity}}</p>
+        <p class="fs-3">Brand: {{data.brand}}</p>
+        <p>{{data.discription}}</p>
+        <p>{{data.author}}</p>
+        <div>
+            <form action="{% url 'carUpdate' data.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary " type="submit">GET START</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="container mx-auto" style="min-height: 100vh;">
+    {% for cmt in allcomments %}
+    <p>{{cmt.comment}}</p>
+    {% endfor %}
+    <form method="post" class="w-75 container mx-auto">
+        {% csrf_token %}
+        {{commentForm | crispy}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
