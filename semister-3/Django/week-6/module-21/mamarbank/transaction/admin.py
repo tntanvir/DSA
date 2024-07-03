@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from .views import sendMailtoUser
 # from transactions.models import Transaction
 from .models import Transaction
 @admin.register(Transaction)
@@ -10,5 +10,6 @@ class TransactionAdmin(admin.ModelAdmin):
         obj.account.balance += obj.amount
         obj.balance_after_transaction = obj.account.balance
         obj.account.save()
+        sendMailtoUser('Loan Requst approve','transactions/loan_apv_mail',obj.account.user,obj.amount)
         super().save_model(request, obj, form, change)
 

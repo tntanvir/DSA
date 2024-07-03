@@ -71,13 +71,20 @@ class LoanRequestForm(TransactionForm):
 
 
 
-class SendMoneyForm(forms.Form):
+class SendMoneyForm(TransactionForm):
     account_number = forms.IntegerField()
-    amount = forms.IntegerField()
+    class Meta:
+        model = Transaction
+        fields = [
+            'amount',
+            'transaction_type'
+        ]
 
-    # def clean_amount(self):
-    #     amount = self.cleaned_data.get("amount")
-    #     print(amount)
-    #     if amount <= 0:
-    #         raise forms.ValidationError("Amount must be greater than zero")
-    #     return amount
+    def clean_amount(self):
+        amount = self.cleaned_data.get("amount")
+        
+        if amount <= 0:
+            raise forms.ValidationError("Amount must be greater than zero")
+        return amount
+
+

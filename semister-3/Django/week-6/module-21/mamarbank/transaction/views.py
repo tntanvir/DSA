@@ -24,6 +24,28 @@ from transaction.forms import (
     SendMoneyForm,
 )
 from transaction.models import Transaction
+from django.core.mail import EmailMultiAlternatives,EmailMessage
+from django.template.loader import render_to_string
+
+
+def sendMailtoUser(subject,templates,user,amount):
+    mail_subject= subject
+    message= render_to_string(templates,{
+        'user': user,
+        'amount':amount
+    })
+    to_mail=user.email
+    send_mail=EmailMultiAlternatives(mail_subject,'',to=[to_mail])
+    send_mail.attach_alternative(message, "text/html")
+    send_mail.send()
+
+
+
+
+
+
+
+
 
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
     template_name = 'transactions/transaction_form.html'
@@ -72,44 +94,43 @@ class DepositMoneyView(TransactionCreateMixin):
             self.request,
             f'{"{:,.2f}".format(float(amount))}$ was deposited to your account successfully'
         )
-
+        sendMailtoUser("Diposit Money",'transactions/deposit_mail.html',self.request.user,amount)
+        
         return super().form_valid(form)
 
 
 
 
-class SendMoneyView(View):
-   
+
+
+class SendMoneyView(TransactionCreateMixin):
+    form_class = SendMoneyForm
     template_name = "transactions/sendmoney.html"
+    title = "Send Money"
+    success_url = reverse_lazy("transaction_report")
 
+    def get_initial(self):
+        initial = {"transaction_type": SENDMONEY}
+        return initial
 
-    def get(self,request):
-        form=SendMoneyForm()
-        return render(request, 'transactions/sendmoney.html',{'form':form})
-
-    def post(self, request):
-        print("Validating")
-        form=SendMoneyForm(request.POST)
-        if form.is_valid():
-            print('from is valid')
-            amount = form.cleaned_data.get("amount")
-            sender = self.request.user.account
-            account_number = form.cleaned_data.get("account_number")
-
-            try:
-                print('insite try')
-                reciver = UserBankAccount.objects.get(account_number=account_number)
-                reciver.balance += amount
-                sender.balance -= amount
-                reciver.save()
-                sender.save()
-                messages.success(self.request, "Send Money Successful")
-            
-                
-            except UserBankAccount.DoesNotExist:
-                print('insite except')
-                form.add_error("account_number", "Invalid Account No")
-        return render(request, 'transactions/sendmoney.html',{'form':form})
+    def form_valid(self, form):
+        print('validating')
+        account_number = form.cleaned_data.get("account_number")
+        amount = form.cleaned_data.get("amount")
+        sender = self.request.user.account
+        try:
+            print(account_number,amount)
+            reciver = UserBankAccount.objects.get(account_number=account_number)
+            reciver.balance += amount
+            sender.balance -= amount
+            reciver.save(update_fields=["balance"])
+            sender.save(update_fields=["balance"])
+            messages.success(self.request, "Send Money Successful")
+            sendMailtoUser("Send Money",'transactions/send_money_mail.html',self.request.user,amount)
+            return super().form_valid(form)
+        except UserBankAccount.DoesNotExist:
+            form.add_error("account_no", "Invalid Account No")
+            return super().form_invalid(form)
 
 
 class WithdrawMoneyView(TransactionCreateMixin):
@@ -132,7 +153,7 @@ class WithdrawMoneyView(TransactionCreateMixin):
             self.request,
             f'Successfully withdrawn {"{:,.2f}".format(float(amount))}$ from your account'
         )
-
+        sendMailtoUser("Withdraw Money",'transactions/withdraw_mail.html',self.request.user,amount)
         return super().form_valid(form)
 
 class LoanRequestView(TransactionCreateMixin):
@@ -153,6 +174,8 @@ class LoanRequestView(TransactionCreateMixin):
             self.request,
             f'Loan request for {"{:,.2f}".format(float(amount))}$ submitted successfully'
         )
+        print(self.request.user)
+        sendMailtoUser("Loan Requset",'transactions/loan_mail.html',self.request.user,amount)
 
         return super().form_valid(form)
     

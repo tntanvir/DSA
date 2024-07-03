@@ -6,8 +6,13 @@ from django.contrib.auth import login,logout
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import redirect
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 # Create your views here.
-
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('home')
+    template_name = 'change_password.html'
 class UserRegistrationView(FormView):
     template_name = 'user_register.html'
     form_class = UserRegistrationForm
@@ -47,3 +52,5 @@ class UserBankAccountUpdateView(View):
             form.save()
             return redirect('profile')  # Redirect to the user's profile page
         return render(request, self.template_name, {'form': form})
+    
+
